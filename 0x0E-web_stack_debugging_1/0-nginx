@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Function to check if a command exists
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Check if nginx is installed
+if ! command_exists nginx; then
+  echo "Nginx is not installed. Installing..."
+  sudo apt update
+  sudo apt install nginx -y
+fi
+
+# Check Nginx configuration for port 80
+if ! grep -q "listen\s*80" /etc/nginx/nginx.conf; then
+  echo "Configuring Nginx to listen on port 80..."
+  sudo sed -i 's/\(listen\s*\)80;/\180;/' /etc/nginx/nginx.conf
+fi
+
+# Check for port binding conflicts
+if sudo netstat -tuln | grep -q ":80 "; then
+  echo "Port 80 is already in use."
+  exit 1
+fi
+
+# Check firewall rules
+if sudo ufw status | grep -q "80/tcp"; then
+  echo "Port 80 is blocked by firewall."
+  exit 1
+fi
+
+# Restart Nginx
+echo "Restarting Nginx..."
+sudo systemctl restart nginx
+
+echo "Nginx has been configured to listen on port 80."
+
