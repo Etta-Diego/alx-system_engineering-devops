@@ -1,32 +1,16 @@
 #!/usr/bin/env bash
-# This script prints the information of domains and subdomains
+# print domains and subdomains
 
-# Function to get and print DNS record information
-print_domain_subdomain() {
-    local domain="$1"
-    local subdomain="$2"
-    local full_domain="${subdomain}.${domain}"
-
-    # Perform a DNS lookup and capture the output
-    dig_output=$(dig "${full_domain}")
-
-    # Extract the answer section using grep
-    answer_section=$(echo "${dig_output}" | grep -A1 'ANSWER SECTION:')
-
-    # Replace the full domain name with the subdomain using sed
-    formatted_output=$(echo "${answer_section}" | sed -r "s/${full_domain}/$subdomain/g")
-
-    # Print the relevant DNS record information using awk
-    echo "${formatted_output}" | awk -F" " 'NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
+print_domain_subdomain () {
+    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
 
-# Check if the number of arguments is 2
-if [ "$#" -eq 2 ]; then
-    # Print information for the specified subdomain
-    print_domain_subdomain "$1" "$2"
+if [ "$#" -eq 2 ]
+then
+    print_domain_subdomain "$2.$1" "$2"
 else
-    # Print information for the predefined subdomains
-    for sub in www lb-01 web-01 web-02; do
-        print_domain_subdomain "$1" "$sub"
-    done
+    print_domain_subdomain "www.$1" "www"
+    print_domain_subdomain "lb-01.$1" "lb-01"
+    print_domain_subdomain "web-01.$1" "web-01"
+    print_domain_subdomain "web-02.$1" "web-02"
 fi
