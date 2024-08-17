@@ -1,8 +1,3 @@
----
-
-
----
-
 <div>  <h2>Postmortem: Nginx Not Listening on Port 80.</h2><h2>  </h2></div>
 <div>
 <img src="https://i.imgur.com/VtLKeHd.jpg" alt="a man blocked his ears and a hand with speakers">
@@ -67,8 +62,8 @@ Because the importance of syntax validation was underestimated in the CI/CD pipe
 <p>Backlog Check</p>
 <p><img src="https://i.imgur.com/MwN44iZ.png" alt="enter image description here"></p>
 <p>There were no specific items in the engineering backlog that could have prevented this incident. However, there were ongoing tasks related to improving the deployment process, including the addition of automated tests, which had not yet been prioritized.</p>
-<p>Recurrence<br>
-<img src="https://i.imgur.com/xdZZr3c.jpg" alt="enter image description here"></p>
+<p>Recurrence</p>
+<p><img src="https://i.imgur.com/xdZZr3c.jpg" alt="enter image description here"></p>
 <p>A similar incident occurred two months prior, where a configuration error led to a partial outage. The mitigation at the time involved manual checks, which were not effective in preventing this incident. The lack of automated validation has been a recurring issue.</p>
 <p>Lessons Learnt</p>
 <p><img src="https://i.imgur.com/KWy29v6.png" alt="enter image description here"></p>
