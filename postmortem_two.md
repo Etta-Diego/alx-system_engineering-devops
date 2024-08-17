@@ -1,8 +1,19 @@
-<div>  <h2>Postmortem: Nginx Not Listening on Port 80.</h2><h2>  </h2></div>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>postmortem_two</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><div>  <h2>Postmortem: Nginx Not Listening on Port 80.</h2><h2>  </h2></div>
 <div>
 <img src="https://i.imgur.com/VtLKeHd.jpg" alt="a man blocked his ears and a hand with speakers">
 </div>
-<p>Incident Summary:</p>
+<p><strong>Incident Summary:</strong></p>
 <div>
   <img src="https://i.imgur.com/cO4Lxv9.png" alt="meme of Mr Grub describing the incident">
 </div>
@@ -79,4 +90,7 @@ Automated syntax validation should be implemented to catch configuration errors 
 Action: Implement automated syntax validation for Nginx configurations in the CI/CD pipeline.<br>
 Deadline: September 1, 2024<br>
 Tracking: Jira Ticket #NGX-7890</p>
+</div>
+</body>
 
+</html>
